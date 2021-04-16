@@ -28,27 +28,6 @@
 #define GWL_HINSTANCE (-6)
 using namespace std;
 
-int isOtherOS();
-#ifdef _WIN32
-  #include "WSetup.h"
-#elif _WIN64 
-  #include "WSetup.h"
-#elif __APPLE__
-  #include "Setup.h"
-#elif __linux__
-  #include "LSetup.h"
-#else
-  #include "OSetup.h"
-#endif
-
-#ifdef OT_OS
-  int isOtherOS() {
-      MessageBox(NULL, L"This OS is not supported!", L"", 0);
-      return 0;
-  }
-#endif
-
-
 #define Monitors GetSystemMetrics(SM_CMONITORS)
 #define CursorY GetSystemMetrics(SM_CYCURSOR)
 #define CursorX GetSystemMetrics(SM_CXCURSOR)
@@ -107,12 +86,11 @@ VOID CALLBACK TimerProc(HWND hwnd,
     MessageBox(NULL, L"The Time Elapsed!", L"Timer Procedure", MB_OK);
     if (!KillTimer(hwnd, idEvent)) {
         MessageBox(NULL, L"Cannot stop the timer.Please close the window manually.", L"Timer Procedure", MB_OK);
-
     }
 }
 #define notInit(hWnd) if(hWnd == NULL){ MessageBoxW(NULL,L"The Window did not created",L"Error",MB_ICONERROR | MB_OK); }
 
-void newFont(int Width) {
+void newFont(int Width,int Weight) {
 
 }
 void newRoundRect(HWND h = NULL, int a = 10, int b = 10, int c = 210, int d = 210, int w1 = 10, int h1 = 10) {
@@ -195,6 +173,9 @@ public:
     void LoadCrs(LPWSTR k) {
         Cursor = LoadCursor(nullptr, k);
     }
+    void LoadImg(){
+    
+    }
     void setBack(int r, int g, int b) {
         Brush = (HBRUSH)RGB(r, g, b);
     }
@@ -225,8 +206,8 @@ HWND createWinType(LPCWSTR Name, Style style) {
     return createNewWin(createClass(Name, style), style);
 }
 
-void ToWin(HWND g) {
-
+enum Events {
+  command = WM_COMMAND
 }
 
 INT_PTR CALLBACK SelDate(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
@@ -253,6 +234,15 @@ INT_PTR CALLBACK SelDate(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 class Point {
 public:
     int X, Y;
+    Point():X(0),Y(0) {}
+    Point(int a,int b){
+     X = a;
+     Y = b;
+    }
+  Point(POINT u){
+    X = u.X;
+    Y = u.Y;
+  }
 };
 
 class Size {
