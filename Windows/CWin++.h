@@ -42,6 +42,13 @@ HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 
+enum CheckState {
+  Checked,
+  Medium,
+  NoCheck,
+  Disabled
+};
+
 LPCWSTR getWStr(std::string p) {
     std::wstring stemp = std::wstring(p.begin(), p.end());
     LPCWSTR sw = stemp.c_str();
@@ -261,7 +268,6 @@ public:
     int Top, Left;
     HWND Parent = NULL;
     HWND win = NULL;
-    std::vector<HWND> Children = std::vector<HWND>();
     void SetParent(Control* n) {
         Parent = (*n).win;
     }
@@ -772,6 +778,9 @@ public:
     int Left = 10;
     bool ThreeState = false;
     LPCWSTR Text = L"CheckBox";
+    CheckBox(bool r){
+        ThreeState = r;
+    }
     void Show() {
         if (!ThreeState) {
             win = CreateWindowEx(
