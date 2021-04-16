@@ -18,4 +18,8 @@ class LayoutViewer {
 
 };
 
+class HTMLViewer {
+  
+};
+
 #endif // CWIN_H
