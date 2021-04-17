@@ -778,6 +778,11 @@ public:
     int Left = 10;
     bool ThreeState = false;
     LPCWSTR Text = L"CheckBox";
+    CheckBox(CheckState a){
+      switch(a){
+          
+      }
+    }
     CheckBox(bool r){
         ThreeState = r;
     }
