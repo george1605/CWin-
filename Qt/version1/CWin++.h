@@ -22,4 +22,16 @@ class HTMLViewer {
   
 };
 
+class ColorDialog {
+  
+};
+
+class FileDialog {
+  
+};
+
+class OpenFileDialog : FileDialog {
+  
+}
+
 #endif // CWIN_H
