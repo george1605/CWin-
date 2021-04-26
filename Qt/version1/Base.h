@@ -17,10 +17,19 @@
 #include <QFont>
 #include <QCheckBox>
 #include <QProgressBar>
+#include <QPrintDialog> 
 
-class Control : public Qt3DCore::QComponent{
+class PrintDialog : public QPrintDialog {
 public:
+   char* FileName;
+   PrintDialog(){}
+   void Show(){
+     this->open(NULL,"");
+   }
+}
 
+class Control : public Qt3DCore::QComponent {
+public:
 };
 
 void Destroy(Control* j){
