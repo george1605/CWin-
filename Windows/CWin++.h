@@ -36,6 +36,7 @@ using namespace std;
 #define IDI_PROJECTIC IDI_ICON
 #define BaseFont DS_SHELLFONT 
 #define MAX_LOADSTRING 100
+#define ShuttingDown GetSystemMetrics(SM_SHUTTINGDOWN)
 int CALLBACK MainProc(HWND x, UINT Message, LPARAM l, WPARAM w);
 // Global Variables:
 HINSTANCE hInst;                                // current instance
@@ -368,6 +369,7 @@ public:
 
 #define baseTimerID 0x11ff11
 int ActiveTimers = 0;
+
 class Timer : public Control {
 public:
     UINT_PTR ID = baseTimerID + ActiveTimers;
