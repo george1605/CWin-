@@ -1878,11 +1878,15 @@ public:
     void operator =(Form* p) {
         Width = p->Width;
         Height = p->Height;
-        free(p);
+        try{
+          free(p);
+        }catch(...){
+          p = NULL;
+        }
     }
     void AddControls(vector<Control> c) {
         Show();
-        for (Control k : c) {
+        for(Control k : c) {
             k.Parent = win;
             k.Show();
         }
@@ -1965,27 +1969,24 @@ WNDCLASSEXW setWinClass(HINSTANCE hInstance, UINT Style = CS_HREDRAW | CS_VREDRA
     return wcex;
 }
 
-class CDialog : public Form {
-
-};
-
-class ReadFileForm : public Form {
+class Application {
 private:
-    std::string aux;
+  void* MainWin;
 public:
-    DWORD Bytes;
-    LPCWSTR FileName;
-    LPCWSTR Content;
-    void ShowText() {
-        HANDLE hin = { (void*)FileName };
-        ReadFile(hin, (LPVOID)Content, 4028, &Bytes,NULL);
-        SetWindowText(win, FileName);
-        Label h;
-        h.Text = Content;
-        h.Parent = win;
-        h.Show();
-    }
+  void setMainWin(void* p){
+    MainWin = p;
+  }
 };
+
+class MainWindow : public Form {
+public:
+  MainWindow(){}
+  MainWindow(Application i){
+    i.setMainWin(this);
+  }
+};
+
+
 #define AddComp(Message,hWnd,x,name) if(Message == WM_CREATE){ x[name] = hWnd; }
 
 class TextBoxList : public ListBox {
@@ -2024,7 +2025,6 @@ void DefRect(int top, int bottom, int left, int right,RECT& n) {
     k.right = right;
     n = k;
 }
-#define alias(a,b) typedef a b;
 #define InvCol(r,g,b) RGB(255-r,255-g,255-b)
 
 void Redraw(RECT n, HWND h, UINT Message) {
@@ -2041,22 +2041,4 @@ public:
         Context = GetDC(r);
     }
 };
-
-void runGUXFile(string path,HWND ParentWin) {
-    string Text;
-    ifstream myfile(path);
-    HWND $CURRENT_WIN = (HWND)NULL;
-    while (getline(myfile, Text)) {
-        if (Text.find("defc") != string::npos && Text.find("Button") != string::npos) {
-            Button k;
-            k.Text = L"";
-        }
-        if (Text.find("defw") != string::npos && Text.find("$CURRENT_WIN") != string::npos) {
-            $CURRENT_WIN = ParentWin;
-        }
-        if (Text.find("show") != string::npos) {
-            ShowWindow($CURRENT_WIN, SW_NORMAL);
-        }
-    }
-}
 
