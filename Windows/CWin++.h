@@ -140,37 +140,6 @@ public:
     HWND win = NULL;
 };
 
-std::string decToHexa(int n)
-{
-    char hexaDeciNum[100];
-    std::string res;
-    // counter for hexadecimal number array 
-    int i = 0;
-    while (n != 0)
-    {
-        int temp = 0;
-        temp = n % 16;
-
-        // check if temp < 10 
-        if (temp < 10)
-        {
-            hexaDeciNum[i] = temp + 48;
-            i++;
-        }
-        else
-        {
-            hexaDeciNum[i] = temp + 55;
-            i++;
-        }
-
-        n = n / 16;
-    }
-
-    for (int j = i - 1; j >= 0; j--)
-        res += hexaDeciNum[j];
-    return res;
-}
-
 void MsgBox(LPCWSTR message = L"", LPCWSTR title = L"", UINT Buttons = MB_OK) {
     MessageBoxW(NULL, message, title, Buttons);
 }
@@ -178,6 +147,11 @@ void MsgBox(LPCWSTR message = L"", LPCWSTR title = L"", UINT Buttons = MB_OK) {
 void MsgBeep(UINT Buttons = MB_ICONASTERISK) {
     MessageBeep(Buttons);
 }
+
+class MsgBoxArgs : public MSGBOXPARAMSA{
+public:
+   MsgBoxArgs(){}
+};
 
 class Style {
 public:
