@@ -60,8 +60,17 @@ public:
     CheckBox(){}
     CheckBox(CheckState u){
      switch(u){
-      case CheckState::Disabled:
+      case CheckState::Checked:
 
+      break;
+      case CheckState::Disabled:
+         
+      break;
+      case CheckState::Medium:
+         
+      break;
+      default:
+         
       break;
      }
     }
