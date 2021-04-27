@@ -50,6 +50,10 @@ enum CheckState {
   Disabled
 };
 
+class PaintArgs : BP_PAINTPARAMS  {
+  
+};
+
 class Font {
 private:
   HFONT i;
