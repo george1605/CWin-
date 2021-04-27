@@ -17,7 +17,20 @@
 #include <QFont>
 #include <QCheckBox>
 #include <QProgressBar>
-#include <QPrintDialog> 
+#include <QPrintDialog>
+#include <QApplication> 
+
+class Application: public QApplication {
+private:
+  void* MainWin;
+public:
+   void setMainWin(void* p){
+     MainWin = p;
+   }
+   void Show(){
+     MainWin->show();
+   }
+};
 
 class PrintDialog : public QPrintDialog {
 public:
@@ -26,10 +39,11 @@ public:
    void Show(){
      this->open(NULL,"");
    }
-}
+};
 
 class Control : public Qt3DCore::QComponent {
 public:
+  
 };
 
 void Destroy(Control* j){
