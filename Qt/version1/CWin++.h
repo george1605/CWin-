@@ -2,6 +2,8 @@
 #define CWIN_H
 
 #include "Base.h"
+#include <QColorDialog> 
+
 void MoveCWin(QWindow x,int top,int left){
   x.position().setX(left);
   x.position().setY(top);
@@ -14,15 +16,7 @@ void MoveCWin(QWindow x,int top,int left,int X,int Y){
   x.size().setWidth(X);
 }
 
-class LayoutViewer {
-
-};
-
-class HTMLViewer {
-  
-};
-
-class ColorDialog {
+class ColorDialog : public QColorDialog {
   
 };
 
@@ -30,7 +24,7 @@ class FileDialog {
   
 };
 
-class OpenFileDialog : FileDialog {
+class OpenFileDialog : public FileDialog {
   
 };
 
