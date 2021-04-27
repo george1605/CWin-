@@ -50,6 +50,18 @@ enum CheckState {
   Disabled
 };
 
+class Font {
+private:
+  HFONT i;
+public:
+  Font(){}
+  Font(int Width,int Height){}
+};
+
+namespace MyFonts {
+  
+}
+
 LPCWSTR getWStr(std::string p) {
     std::wstring stemp = std::wstring(p.begin(), p.end());
     LPCWSTR sw = stemp.c_str();
@@ -97,10 +109,6 @@ VOID CALLBACK TimerProc(HWND hwnd,
     }
 }
 #define notInit(hWnd) if(hWnd == NULL){ MessageBoxW(NULL,L"The Window did not created",L"Error",MB_ICONERROR | MB_OK); }
-
-void newFont(int Width,int Weight) {
-
-}
 void newRoundRect(HWND h = NULL, int a = 10, int b = 10, int c = 210, int d = 210, int w1 = 10, int h1 = 10) {
     HRGN x = CreateRoundRectRgn(a, b, c, d, w1, h1);
     SetWindowRgn(h, x, true);
