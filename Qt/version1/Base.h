@@ -52,8 +52,17 @@ void Destroy(Control* j){
 
 class ProgressBar : public QProgressBar{
 public:
+    int Value = 100;
     void Show(){
         this->show();
+    }
+    void SetValue(int i){
+      if(i > 0 && i < 101){
+        this->setValue(i);
+        Value = i;
+      }else{
+        throw "[ProgressbarError]: Value not in range(0 - 100)";
+      }
     }
 };
 
