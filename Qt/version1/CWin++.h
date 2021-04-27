@@ -32,6 +32,15 @@ class FileDialog {
 
 class OpenFileDialog : FileDialog {
   
-}
+};
+
+
+class PaintArgs {
+public:
+  int                 Flags;
+  const RECT          *prcExclude;
+  const BLENDFUNCTION *pBlendFunction;
+  PaintArgs(){}
+};
 
 #endif // CWIN_H
