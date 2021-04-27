@@ -1,2 +1,2 @@
 # CWin-
-A GUI Library based on WINAPI and Qt
+A Cross-Platform GUI Library based on WINAPI and Qt
