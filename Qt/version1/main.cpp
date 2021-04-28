@@ -3,7 +3,7 @@
 #include <QApplication>
 
 int main(int argc, char *argv[])
-{
+{//or char** argv
     QApplication a(argc, argv);
     MainWindow w;
     w.setVisible(true);
